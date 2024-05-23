@@ -1,8 +1,7 @@
-FROM node:21.7.3-alpine3.18
+FROM node:20
 
-RUN mkdir -p /opt/app
 
-WORKDIR /opt/app
+WORKDIR /usr/src/app
 
 COPY package*.json ./
 
@@ -10,6 +9,8 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5000
+ENV PORT=3000
 
-CMD ["npm", "run", "start"]
+ENV MODEL_URL=https://storage.googleapis.com/ml-submission-dicoding/model-in-prod/model.json
+
+CMD ["npm", "start"]
